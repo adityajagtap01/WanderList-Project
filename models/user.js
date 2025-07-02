@@ -1,7 +1,7 @@
 
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
-const passportLocalMongoose = require("passport-Local-Mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 
 const userSchema = new schema({
