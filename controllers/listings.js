@@ -121,19 +121,19 @@ module.exports.deletedListing = async (req, res) => {
 }
 
 
-//search feature
-// module.exports.index = async (req, res) => {
-//     const { q } = req.query;
 
-//     let allListings;
-//     if (q) {
-//         const regex = new RegExp(q, 'i'); // case-insensitive search
-//         allListings = await Listing.find({
-//             $or: [{ title: regex }, { country: regex }]
-//         });
-//     } else {
-//         allListings = await Listing.find({});
-//     }
+module.exports.index = async (req, res) => {
+    const { q } = req.query;
 
-//     res.render("listings/index", { allListings, q });
-// };
+    let allListings;
+    if (q) {
+        const regex = new RegExp(q, 'i'); // case-insensitive search
+        allListings = await Listing.find({
+            $or: [{ title: regex }, { country: regex }]
+        });
+    } else {
+        allListings = await Listing.find({});
+    }
+
+    res.render("listings/index", { allListings, q });
+};
