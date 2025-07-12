@@ -126,14 +126,24 @@ module.exports.index = async (req, res) => {
     const { q } = req.query;
 
     let allListings;
+    let noResults = false;
+
     if (q) {
-        const regex = new RegExp(q, 'i'); // case-insensitive search
+        const regex = new RegExp(q, 'i'); // case-insensitive
         allListings = await Listing.find({
-            $or: [{ title: regex }, { country: regex }]
+            $or: [
+                { title: regex },
+                { country: regex },
+                { location: regex }
+            ]
         });
+
+        if (allListings.length === 0) {
+            noResults = true;
+        }
     } else {
         allListings = await Listing.find({});
     }
 
-    res.render("listings/index", { allListings, q });
+    res.render("listings/index", { allListings, q, noResults });
 };
